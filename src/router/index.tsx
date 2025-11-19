@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import Register from "@/pages/Register";
 import Dashboard from "@/pages/Dashboard";
 import Analytics from "@/pages/Analytics";
+import NotFound from "@/pages/NotFound";
 
 export const router = createBrowserRouter([
   {
@@ -31,4 +32,10 @@ export const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
+  {
+    path:"*",
+    element:(
+        <NotFound/>
+    )
+  }
 ]);
