@@ -22,10 +22,15 @@ interface AnalyticsData {
   last30DaysClicks: Record<string, number>;
 }
 
+interface ChartPoint {
+  date: string;
+  clicks: number;
+}
+
 export default function Analytics() {
   const { id } = useParams();
   const [data, setData] = useState<AnalyticsData | null>(null);
-  const [chartData, setChartData] = useState([]);
+  const [chartData, setChartData] = useState<ChartPoint[]>([]);
 
   const loadAnalytics = async () => {
     try {
@@ -51,8 +56,12 @@ export default function Analytics() {
   };
 
   useEffect(() => {
-    loadAnalytics();
+    const fetchData = async () => {
+      await loadAnalytics();
+    };
+    fetchData();
   }, []);
+
 
   if (!data)
     return (
@@ -115,7 +124,7 @@ export default function Analytics() {
         >
           <p className="text-gray-600 dark:text-gray-400">Last 30 Days Clicks</p>
           <p className="text-3xl font-bold mt-1 text-gray-900 dark:text-white">
-            {chartData.reduce((sum: number, d: any) => sum + d.clicks, 0)}
+            {chartData.reduce((sum: number, d: ChartPoint) => sum + d.clicks, 0)}
           </p>
         </motion.div>
       </motion.div>

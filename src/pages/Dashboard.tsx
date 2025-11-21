@@ -41,8 +41,11 @@ export default function Dashboard() {
   }, []);
 
   useEffect(() => {
-    loadUrls();
-  }, [loadUrls]);
+    const fetchData = async () => {
+      await loadUrls();
+    };
+    fetchData();
+  }, []);
 
   const createShortUrl = async () => {
     if (!originalUrl) return;
