@@ -48,68 +48,82 @@ export default function Login() {
 
   return (
     <MainLayout>
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 to-gray-100"
-    >
-      {/* Animated Card */}
       <motion.div
-        initial={{ y: 40, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 60 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="
+          flex items-center justify-center min-h-screen 
+          bg-gradient-to-br from-gray-50 to-gray-100
+          dark:from-gray-900 dark:to-gray-950
+        "
       >
-        <Card className="w-[380px] shadow-xl border rounded-2xl">
-          <CardHeader>
-            <CardTitle className="text-center text-2xl font-bold">
-              Welcome Back 👋
-            </CardTitle>
-            <p className="text-center text-sm text-gray-600 mt-1">
-              Login to your account
-            </p>
-          </CardHeader>
-
-          <CardContent>
-            <form onSubmit={submit} className="space-y-5">
-              <Input
-                placeholder="Email"
-                type="email"
-                required
-                className="h-11 text-base"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-
-              <Input
-                placeholder="Password"
-                type="password"
-                required
-                className="h-11 text-base"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-
-              <Button
-                type="submit"
-                className="w-full h-11 text-base font-medium"
-                disabled={loading}
-              >
-                {loading ? "Logging in..." : "Login"}
-              </Button>
-
-              {/* Link */}
-              <p className="text-center text-sm mt-3">
-                Don’t have an account?{" "}
-                <Link
-                  to="/register"
-                  className="text-blue-600 hover:underline font-medium"
-                >
-                  Register
-                </Link>
+        {/* Animated Card */}
+        <motion.div
+          initial={{ y: 40, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: 'spring', stiffness: 60 }}
+        >
+          <Card className="
+            w-[380px] shadow-xl border rounded-2xl
+            bg-white dark:bg-gray-800 
+            dark:border-gray-700
+          ">
+            <CardHeader>
+              <CardTitle className="text-center text-2xl font-bold dark:text-white">
+                Welcome Back 👋
+              </CardTitle>
+              <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-1">
+                Login to your account
               </p>
-            </form>
-          </CardContent>
-        </Card>
+            </CardHeader>
+
+            <CardContent>
+              <form onSubmit={submit} className="space-y-5">
+                <Input
+                  placeholder="Email"
+                  type="email"
+                  required
+                  className="
+                    h-11 text-base 
+                    dark:bg-gray-900 dark:text-white dark:border-gray-700
+                  "
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+
+                <Input
+                  placeholder="Password"
+                  type="password"
+                  required
+                  className="
+                    h-11 text-base
+                    dark:bg-gray-900 dark:text-white dark:border-gray-700
+                  "
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+
+                <Button
+                  type="submit"
+                  className="w-full h-11 text-base font-medium"
+                  disabled={loading}
+                >
+                  {loading ? "Logging in..." : "Login"}
+                </Button>
+
+                {/* Register Link */}
+                <p className="text-center text-sm dark:text-gray-300 mt-3">
+                  Don’t have an account?{" "}
+                  <Link
+                    to="/register"
+                    className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                  >
+                    Register
+                  </Link>
+                </p>
+              </form>
+            </CardContent>
+          </Card>
+        </motion.div>
       </motion.div>
-    </motion.div>
     </MainLayout>
   );
 }

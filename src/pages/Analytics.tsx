@@ -57,7 +57,7 @@ export default function Analytics() {
   if (!data)
     return (
       <DashboardLayout>
-        <p className="text-gray-600">Loading analytics...</p>
+        <p className="text-gray-600 dark:text-gray-300">Loading analytics...</p>
       </DashboardLayout>
     );
 
@@ -70,9 +70,10 @@ export default function Analytics() {
         transition={{ duration: 0.25 }}
         className="flex items-center justify-between mb-6"
       >
-        <h1 className="text-3xl font-bold">Analytics</h1>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          Analytics
+        </h1>
 
-        {/* Back Button */}
         <Link to="/">
           <Button variant="secondary">⬅ Back</Button>
         </Link>
@@ -88,28 +89,32 @@ export default function Analytics() {
         {/* Card 1 */}
         <motion.div
           whileHover={{ scale: 1.02 }}
-          className="p-6 bg-white shadow rounded-xl border"
+          className="p-6 bg-white dark:bg-gray-800 shadow rounded-xl border dark:border-gray-700"
         >
-          <p className="text-gray-600">Total Clicks</p>
-          <p className="text-3xl font-bold mt-1">{data.totalClicks}</p>
+          <p className="text-gray-600 dark:text-gray-400">Total Clicks</p>
+          <p className="text-3xl font-bold mt-1 text-gray-900 dark:text-white">
+            {data.totalClicks}
+          </p>
         </motion.div>
 
         {/* Card 2 */}
         <motion.div
           whileHover={{ scale: 1.02 }}
-          className="p-6 bg-white shadow rounded-xl border"
+          className="p-6 bg-white dark:bg-gray-800 shadow rounded-xl border dark:border-gray-700"
         >
-          <p className="text-gray-600">Unique Visitors</p>
-          <p className="text-3xl font-bold mt-1">{data.uniqueVisitors}</p>
+          <p className="text-gray-600 dark:text-gray-400">Unique Visitors</p>
+          <p className="text-3xl font-bold mt-1 text-gray-900 dark:text-white">
+            {data.uniqueVisitors}
+          </p>
         </motion.div>
 
         {/* Card 3 */}
         <motion.div
           whileHover={{ scale: 1.02 }}
-          className="p-6 bg-white shadow rounded-xl border"
+          className="p-6 bg-white dark:bg-gray-800 shadow rounded-xl border dark:border-gray-700"
         >
-          <p className="text-gray-600">Last 30 Days Clicks</p>
-          <p className="text-3xl font-bold mt-1">
+          <p className="text-gray-600 dark:text-gray-400">Last 30 Days Clicks</p>
+          <p className="text-3xl font-bold mt-1 text-gray-900 dark:text-white">
             {chartData.reduce((sum: number, d: any) => sum + d.clicks, 0)}
           </p>
         </motion.div>
@@ -120,19 +125,40 @@ export default function Analytics() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.25 }}
-        className="bg-white p-6 shadow rounded-xl border h-[420px]"
+        className="bg-white dark:bg-gray-800 p-6 shadow rounded-xl border dark:border-gray-700 h-[420px]"
       >
-        <h2 className="text-lg font-semibold mb-4">Clicks Over Last 30 Days</h2>
+        <h2 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+          Clicks Over Last 30 Days
+        </h2>
 
         {chartData.length === 0 ? (
-          <p className="text-gray-500">No click data available yet.</p>
+          <p className="text-gray-500 dark:text-gray-400">
+            No click data available yet.
+          </p>
         ) : (
-          <ResponsiveContainer width="100%" height="100%"  className="p-2">
+          <ResponsiveContainer width="100%" height="100%" className="p-2">
             <LineChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-              <XAxis dataKey="date" tick={{ fontSize: 12 }} />
-              <YAxis allowDecimals={false} tick={{ fontSize: 12 }} />
-              <Tooltip />
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke="#e5e7eb"
+                className="dark:stroke-gray-700"
+              />
+              <XAxis
+                dataKey="date"
+                tick={{ fontSize: 12, fill: document.documentElement.classList.contains("dark")? "#d1d5db"  : "#374151" }}
+              />
+              <YAxis
+                allowDecimals={false}
+                tick={{ fontSize: 12, fill: document.documentElement.classList.contains("dark")? "#d1d5db"  : "#374151" }}
+              />
+              <Tooltip
+                contentStyle={{
+                  background: "var(--x-bg)",
+                  borderRadius: "8px",
+                  border: "1px solid var(--x-border)"
+                }}
+                labelStyle={{ color: "var(--x-text)" }}
+              />
               <Line
                 type="monotone"
                 dataKey="clicks"
