@@ -108,13 +108,13 @@ export default function Dashboard() {
               </p>
               <div className="flex items-center gap-3 mt-1">
                 <a
-                  href={`http://localhost:8080/${shortened}`}
+                  href={`${import.meta.env.VITE_API_URL}${shortened}`}
                   target="_blank"
                   className="text-blue-600 dark:text-blue-400 underline"
                 >
-                  http://localhost:8080/{shortened}
+                  ${import.meta.env.VITE_API_URL}{shortened}
                 </a>
-                <CopyButton text={`http://localhost:8080/${shortened}`} />
+                <CopyButton text={`${import.meta.env.VITE_API_URL}${shortened}`} />
               </div>
             </motion.div>
           )}
@@ -175,14 +175,14 @@ export default function Dashboard() {
                     <TableCell>
                       <div className="flex items-center gap-2">
                         <a
-                          href={`http://localhost:8080/${u.shortCode}`}
+                          href={`${import.meta.env.VITE_API_URL}${u.shortCode}`}
                           target="_blank"
                           className="text-blue-600 dark:text-blue-400 underline"
                         >
                           {u.shortCode}
                         </a>
                         <CopyButton
-                          text={`http://localhost:8080/${u.shortCode}`}
+                          text={`${import.meta.env.VITE_API_URL}${u.shortCode}`}
                         />
                       </div>
                     </TableCell>
